@@ -15,11 +15,20 @@ library
     base >= 4.8 && < 5,
     pure-default >= 0.7 && < 1,
     pure-lifted >= 0.7 && < 1,
-    pure-txt >= 0.7 && < 1
+    pure-txt >= 0.7 && < 1,
+    bytestring
+
+  if (impl(ghcjs))
+    build-depends:
+      ghcjs-base >= 0.2 && < 0.3
 
   hs-source-dirs: src
 
   exposed-modules:
     Pure.ReadFile
+
+  default-extensions:
+    OverloadedStrings
+    ScopedTypeVariables
 
   default-language: Haskell2010
