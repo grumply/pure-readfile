@@ -30,11 +30,7 @@ getFileAtIndex node n = do
     putMVar mv result
     stop
   mresult <- takeMVar mv
-  let (name_reverse,_) = Txt.span sep (Txt.reverse path)
-      sep '/' = True
-      sep '\\' = True
-      sep _ = False
-  return (Txt.reverse name_reverse,fromMaybe def mresult)
+  return (path,fromMaybe def mresult)
 #else
   return ("","")
 #endif
