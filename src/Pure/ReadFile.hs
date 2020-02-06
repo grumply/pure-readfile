@@ -1,20 +1,30 @@
 {-# LANGUAGE CPP, DeriveGeneric, DeriveAnyClass #-}
-module Pure.ReadFile (ByteTxt,getFileAtIndex,getFile,writeByteTxt,readByteTxt,appendByteTxt) where
+module Pure.ReadFile (ByteTxt(),unsafeByteTxtToTxt,unsafeTxtToByteTxt,getFileAtIndex,getFile,writeByteTxt,readByteTxt,appendByteTxt) where
 
 import Pure.Data.Lifted
 import Pure.Data.Txt as Txt
 import Pure.Data.JSON
 
+import Data.Hashable
+import qualified Data.Text.IO as TIO
+
 import Control.Concurrent
 import Data.Maybe
-
 import GHC.Generics
 import System.IO
 
-import qualified Data.Text.IO as TIO
-
 newtype ByteTxt = ByteTxt Txt
   deriving (Generic,ToJSON,FromJSON)
+
+instance Hashable ByteTxt where
+  hashWithSalt s (ByteTxt bt) =
+    hashWithSalt s bt
+
+unsafeByteTxtToTxt :: ByteTxt -> Txt
+unsafeByteTxtToTxt (ByteTxt t) = t
+
+unsafeTxtToByteTxt :: Txt -> ByteTxt
+unsafeTxtToByteTxt = ByteTxt
 
 #ifdef __GHCJS__
 foreign import javascript unsafe
