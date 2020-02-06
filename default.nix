@@ -1,9 +1,9 @@
-{ mkDerivation, base, ghcjs-base, bytestring, pure-default, pure-lifted, pure-txt, stdenv }:
+{ mkDerivation, base, pure-json, pure-lifted, pure-txt, text, stdenv }:
 mkDerivation {
   pname = "pure-readfile";
   version = "0.7.0.0";
   src = ./.;
-  libraryHaskellDepends = [ base ghcjs-base bytestring pure-default pure-lifted pure-txt ];
+  libraryHaskellDepends = [ base pure-json pure-lifted pure-txt text ];
   homepage = "github.com/grumply/pure-readfile";
   license = stdenv.lib.licenses.bsd3;
 }
