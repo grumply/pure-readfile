@@ -44,7 +44,7 @@ getFileAtIndex node n =
     rdr <- get_file_reader_js node n
     path <- get_file_name_js node n
     mv <- newEmptyMVar
-    onRaw rdr "load" (Options False False True) $ \stop _ -> do
+    onRaw rdr "load" (Options False False True False) $ \stop _ -> do
       result <- rdr ..# "result"
       putMVar mv result
       stop
