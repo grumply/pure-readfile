@@ -14,7 +14,7 @@ import GHC.Generics
 import System.IO
 
 newtype ByteTxt = ByteTxt Txt
-  deriving (Generic,ToJSON,FromJSON)
+  deriving (Generic,ToJSON,FromJSON,Ord,Eq)
 
 instance Hashable ByteTxt where
   hashWithSalt s (ByteTxt bt) =
